@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://v6.exchangerate-api.com; base-uri 'self'; form-action 'self'"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
 <title>Conversor de Divisas — Hugo Rangel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -214,12 +216,12 @@ footer a{color:var(--accent);text-decoration:none}
 </div>
 
 <footer>
-  Datos obtenidos vía <a href="https://exchangerate-api.com" target="_blank">ExchangeRate-API</a> ·
+  Datos obtenidos vía <a href="https://exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a> ·
   Proyecto de portafolio por <strong>Hugo Rangel Madrigales</strong>
 </footer>
 
 <script>
-const API_KEY = 'a9c7b094a1bfa77c16dd3927';
+const API_KEY = 'b83f6f10ad26c4bede09de44';
 const BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}`;
 
 const POPULAR = ['MXN','USD','EUR','GBP','JPY','CAD','AUD','CHF','BRL','CNY','KRW','ARS'];

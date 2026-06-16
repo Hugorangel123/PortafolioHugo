@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
 <title>Hugo Rangel Madrigales — Portafolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -224,7 +226,7 @@ footer strong{color:var(--text);font-weight:500}
         <span class="tag tag-blue">Chart.js</span>
         <span class="tag tag-gray">HTML/CSS/JS</span>
       </div>
-      <a href="https://github.com/Hugorangel123/Dashboard-Gastos.git" target="_blank" class="project-link">Ver en GitHub →</a>
+      <a href="https://github.com/Hugorangel123/Dashboard-Gastos.git" target="_blank" rel="noopener noreferrer" class="project-link">Ver en GitHub →</a>
     </div>
 
     <div class="project-card reveal">
@@ -267,6 +269,20 @@ footer strong{color:var(--text);font-weight:500}
         <span class="tag tag-red">Ciberseguridad</span>
       </div>
       <a href="ip-analyzer.html" class="project-link">Ver demo →</a>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-top">
+        <span class="project-name">Conversor de Divisas</span>
+        <span class="project-status demo">Demo disponible</span>
+      </div>
+      <p class="project-desc">Conversor de monedas con tasas de cambio en tiempo real, gráfica de historial de 7/14/30 días, comparativa de divisas populares y pares rápidos de conversión. Consume una API externa de tipos de cambio.</p>
+      <div class="project-tags">
+        <span class="tag tag-amber">JavaScript</span>
+        <span class="tag tag-blue">Chart.js</span>
+        <span class="tag tag-teal">API REST</span>
+      </div>
+      <a href="currency-converter.html" class="project-link">Ver demo →</a>
     </div>
 
   </div>
@@ -417,15 +433,15 @@ footer strong{color:var(--text);font-weight:500}
         <span class="contact-label">Correo</span>
         <span class="contact-value">hr2780920@gmail.com</span>
       </a>
-      <a href="https://wa.me/528731033842" target="_blank" class="contact-item">
+      <a href="https://wa.me/528731033842" target="_blank" rel="noopener noreferrer" class="contact-item">
         <span class="contact-label">WhatsApp</span>
         <span class="contact-value">+52 873 103 3842</span>
       </a>
-      <a href="https://github.com/Hugorangel123" target="_blank" class="contact-item">
+      <a href="https://github.com/Hugorangel123" target="_blank" rel="noopener noreferrer" class="contact-item">
         <span class="contact-label">GitHub</span>
         <span class="contact-value">github.com/Hugorangel123</span>
       </a>
-      <a href="https://www.linkedin.com/in/hugo-rangel-madrigales-4b6563298/" target="_blank" class="contact-item">
+      <a href="https://www.linkedin.com/in/hugo-rangel-madrigales-4b6563298/" target="_blank" rel="noopener noreferrer" class="contact-item">
         <span class="contact-label">LinkedIn</span>
         <span class="contact-value">linkedin.com/in/hugo-rangel-madrigales</span>
       </a>

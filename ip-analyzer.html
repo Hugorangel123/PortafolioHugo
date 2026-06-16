@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self' https://ipapi.co; base-uri 'self'; form-action 'self'"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
 <title>IP Analyzer — Hugo Rangel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -209,7 +211,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between
 </div>
 
 <div class="footer-note">
-  Datos obtenidos vía <a href="https://ipapi.co" target="_blank">ipapi.co</a> · Proyecto de portafolio por Hugo Rangel Madrigales
+  Datos obtenidos vía <a href="https://ipapi.co" target="_blank" rel="noopener noreferrer">ipapi.co</a> · Proyecto de portafolio por Hugo Rangel Madrigales
 </div>
 
 <script>

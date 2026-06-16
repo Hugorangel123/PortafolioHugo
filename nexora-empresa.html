@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
 <title>Nexora — Soluciones Tecnológicas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -340,14 +342,14 @@ footer strong{color:var(--ink);font-weight:500;font-family:var(--font-display);f
     <h2 class="cta-title reveal">¿Tienes un proyecto<br/>en <em>mente</em>?</h2>
     <p class="cta-sub reveal">Cuéntanos qué necesitas y te respondemos en menos de 24 horas.</p>
     <div class="cta-btns reveal">
-      <a href="https://wa.me/528731033842" target="_blank" class="btn btn-dark">WhatsApp directo</a>
+      <a href="https://wa.me/528731033842" target="_blank" rel="noopener noreferrer" class="btn btn-dark">WhatsApp directo</a>
       <a href="mailto:hr2780920@gmail.com" class="btn btn-outline">Enviar correo</a>
     </div>
   </div>
 </section>
 
 <!-- WhatsApp flotante -->
-<a href="https://wa.me/528731033842" class="wa-float" target="_blank" title="Contactar por WhatsApp">💬</a>
+<a href="https://wa.me/528731033842" class="wa-float" target="_blank" rel="noopener noreferrer" title="Contactar por WhatsApp">💬</a>
 
 <footer>
   <strong>Nexora</strong> — Soluciones Tecnológicas · Nuevo Laredo, Tamaulipas
