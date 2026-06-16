@@ -1,11 +1,419 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documdwwesent</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hugo Rangel Madrigales — Portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAFAF9;
+  --surface:#FFFFFF;
+  --border:#E8E6E0;
+  --text:#1A1A18;
+  --muted:#6B6B67;
+  --accent:#185FA5;
+  --accent-light:#E6F1FB;
+  --tag-bg:#F1EFE8;
+  --tag-text:#444441;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 2.5rem;border-bottom:0.5px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:10}
+.nav-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;letter-spacing:-0.02em;color:var(--text)}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--text);color:#fff!important;padding:6px 16px;border-radius:6px;font-weight:500}
+.nav-cta:hover{opacity:0.85}
+
+.hero{padding:6rem 2.5rem 4rem;max-width:800px;margin:0 auto}
+.hero-label{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1.25rem}
+.hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:500;line-height:1.12;letter-spacing:-0.03em;color:var(--text);margin-bottom:1.5rem}
+.hero-title span{color:var(--accent)}
+.hero-desc{font-size:16px;color:var(--muted);max-width:580px;line-height:1.75;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--text);color:#fff;border:none;padding:0.65rem 1.5rem;border-radius:6px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity 0.2s}
+.btn-primary:hover{opacity:0.85}
+.btn-secondary{background:transparent;color:var(--text);border:0.5px solid var(--border);padding:0.65rem 1.5rem;border-radius:6px;font-size:14px;font-weight:400;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.2s}
+.btn-secondary:hover{background:var(--tag-bg)}
+
+.skills-row{display:flex;gap:0.5rem;flex-wrap:wrap;padding:0 2.5rem;max-width:800px;margin:0 auto 2rem}
+.skill-pill{background:var(--tag-bg);color:var(--tag-text);font-size:12px;padding:4px 12px;border-radius:20px;font-weight:400}
+
+.exp-strip{max-width:800px;margin:0 auto 5rem;padding:0 2.5rem}
+.exp-strip-inner{display:grid;grid-template-columns:repeat(3,1fr);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+.exp-stat{padding:1.25rem 1.5rem;border-right:0.5px solid var(--border);background:var(--surface)}
+.exp-stat:last-child{border-right:none}
+.exp-num{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:600;letter-spacing:-0.03em;color:var(--accent)}
+.exp-label{font-size:12px;color:var(--muted);margin-top:2px}
+
+section{max-width:800px;margin:0 auto;padding:0 2.5rem 5rem}
+.section-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:0.5px solid var(--border)}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+
+.projects-grid{display:flex;flex-direction:column;gap:1px;border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+.project-card{background:var(--surface);padding:1.5rem;border-bottom:0.5px solid var(--border);transition:background 0.15s}
+.project-card:last-child{border-bottom:none}
+.project-card:hover{background:#F6F5F2}
+.project-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:0.6rem}
+.project-name{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:500;color:var(--text);letter-spacing:-0.02em}
+.project-status{font-size:11px;color:var(--muted);border:0.5px solid var(--border);padding:3px 9px;border-radius:20px;white-space:nowrap;background:var(--tag-bg)}
+.project-status.active{color:#0F6E56;border-color:#9FE1CB;background:#E1F5EE}
+.project-status.demo{color:#185FA5;border-color:#B5D4F4;background:#E6F1FB}
+.project-desc{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:1rem}
+.project-tags{display:flex;gap:0.4rem;flex-wrap:wrap}
+.project-link{display:inline-flex;align-items:center;gap:5px;margin-top:0.75rem;font-size:12px;color:var(--accent);text-decoration:none;border:0.5px solid #B5D4F4;padding:3px 10px;border-radius:5px;background:var(--accent-light)}
+.project-link:hover{background:#d0e5f9}
+.tag{font-size:11px;font-family:'Space Grotesk',sans-serif;font-weight:500;padding:3px 10px;border-radius:4px;letter-spacing:0.02em}
+.tag-blue{background:#E6F1FB;color:#0C447C}
+.tag-gray{background:#F1EFE8;color:#444441}
+.tag-teal{background:#E1F5EE;color:#085041}
+.tag-purple{background:#EEEDFE;color:#3C3489}
+.tag-amber{background:#FAEEDA;color:#633806}
+.tag-red{background:#FCEBEB;color:#791F1F}
+
+.exp-timeline{display:flex;flex-direction:column;gap:1px;border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+.exp-item{background:var(--surface);padding:1.5rem;border-bottom:0.5px solid var(--border)}
+.exp-item:last-child{border-bottom:none}
+.exp-item-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:0.4rem}
+.exp-role{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:500;color:var(--text)}
+.exp-period{font-size:11px;color:var(--muted);background:var(--tag-bg);padding:3px 9px;border-radius:20px;white-space:nowrap}
+.exp-period.current{background:#E1F5EE;color:#0F6E56;border:0.5px solid #9FE1CB}
+.exp-company{font-size:13px;color:var(--accent);font-weight:500;margin-bottom:0.6rem}
+.exp-desc{font-size:13px;color:var(--muted);line-height:1.7}
+.exp-skills{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.75rem}
+
+.about-card{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:2rem}
+.about-name{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:500;letter-spacing:-0.02em;margin-bottom:0.25rem}
+.about-role{font-size:13px;color:var(--accent);font-weight:500;margin-bottom:1.25rem}
+.about-text{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding-top:1.25rem;border-top:0.5px solid var(--border)}
+.about-item label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);display:block;margin-bottom:3px}
+.about-item span{font-size:13px;color:var(--text)}
+
+.skills-section{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1.25rem;padding-top:1.25rem;border-top:0.5px solid var(--border)}
+.skill-group label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);display:block;margin-bottom:8px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+
+.soft-skills{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.25rem;padding-top:1.25rem;border-top:0.5px solid var(--border)}
+.soft-label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);width:100%;margin-bottom:4px}
+.soft-pill{background:var(--accent-light);color:#0C447C;font-size:12px;padding:4px 12px;border-radius:20px}
+
+.contact-card{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:2rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.contact-item{display:flex;flex-direction:column;gap:4px;padding:1rem;border:0.5px solid var(--border);border-radius:8px;text-decoration:none;transition:background 0.15s}
+.contact-item:hover{background:var(--tag-bg)}
+.contact-label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)}
+.contact-value{font-size:14px;color:var(--text)}
+
+footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;text-align:center;font-size:12px;color:var(--muted)}
+footer strong{color:var(--text);font-weight:500}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:600px){
+  nav{padding:1rem 1.25rem}
+  .nav-links{gap:1rem}
+  .hero{padding:3.5rem 1.25rem 3rem}
+  .skills-row,.exp-strip{padding:0 1.25rem}
+  .exp-strip-inner{grid-template-columns:1fr 1fr}
+  .exp-stat:nth-child(3){border-top:0.5px solid var(--border);border-right:none;grid-column:1/-1}
+  section{padding:0 1.25rem 4rem}
+  .contact-grid,.skills-section,.about-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
-    
+
+<nav>
+  <span class="nav-name">Hugo Rangel</span>
+  <div class="nav-links">
+    <a href="#proyectos">Proyectos</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#contacto" class="nav-cta">Contacto</a>
+  </div>
+</nav>
+
+<div class="hero reveal">
+  <p class="hero-label">Portafolio · Ing. en Sistemas Computacionales</p>
+  <h1 class="hero-title">Desarrollador Web<br/> y <span>Automatización de Procesos</span></h1>
+  <p class="hero-desc">Estudiante próximo a egresar del ITNLD con experiencia real en desarrollo de sistemas, automatización de procesos, soporte TI, Telecomunicaciones, Ciberseguridad. Construyo herramientas que resuelven problemas reales en empresas.</p>
+  <div class="hero-actions">
+    <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+    <a href="#contacto" class="btn-secondary">Contáctame</a>
+  </div>
+</div>
+
+<div class="skills-row reveal">
+  <span class="skill-pill">C#</span>
+  <span class="skill-pill">Python</span>
+  <span class="skill-pill">JavaScript</span>
+  <span class="skill-pill">PowerBuilder</span>
+  <span class="skill-pill">SQL Server</span>
+  <span class="skill-pill">MySQL</span>
+  <span class="skill-pill">SQLite</span>
+  <span class="skill-pill">Selenium</span>
+  <span class="skill-pill">Git & GitHub</span>
+  <span class="skill-pill">HTML / CSS</span>
+  <span class="skill-pill">Docker</span>
+  <span class="skill-pill">WinServer</span>
+  <span class="skill-pill">Redes & Cableado</span>
+  <span class="skill-pill">Kali Linux</span>
+  <span class="skill-pill">Ubuntu Server</span>
+  <span class="skill-pill">React</span>
+  <span class="skill-pill">Node.js</span>
+  <span class="skill-pill">Flask</span>
+  <span class="skill-pill">Bootstrap</span>
+  <span class="skill-pill">Vue.js</span>
+</div> 
+</div>
+
+<div class="exp-strip reveal">
+  <div class="exp-strip-inner">
+    <div class="exp-stat">
+      <div class="exp-num">3+</div>
+      <div class="exp-label">Años de experiencia</div>
+    </div>
+    <div class="exp-stat">
+      <div class="exp-num">10+</div>
+      <div class="exp-label">Proyectos entregados</div>
+    </div>
+    <div class="exp-stat">
+      <div class="exp-num">9mo</div>
+      <div class="exp-label">Semestre · Egreso dic 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+  <div class="section-header">
+    <span class="section-title">Proyectos Publicos</span>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-top">
+        <span class="project-name">Sistema Reporteador Exelco</span>
+        <span class="project-status active">En producción</span>
+      </div>
+      <p class="project-desc">Sistema para el manejo de archivos Excel con estructuras dinámicas y complejas, orientado a la generación de reportes financieros, flujos de efectivo y revisión de cuentas contables. Desarrollado para uso real en entorno empresarial.</p>
+      <div class="project-tags">
+        <span class="tag tag-blue">C#</span>
+        <span class="tag tag-teal">SQLite</span>
+        <span class="tag tag-purple">Python</span>
+        <span class="tag tag-amber">Selenium</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-top">
+        <span class="project-name">Dashboard de Gastos Personales</span>
+        <span class="project-status demo">Demo disponible</span>
+      </div>
+      <p class="project-desc">Aplicación web para registrar y visualizar ingresos y gastos con gráficas interactivas por categoría, flujo diario del mes y balance en tiempo real. Base de datos local con SQLite.</p>
+      <div class="project-tags">
+        <span class="tag tag-purple">Python Flask</span>
+        <span class="tag tag-teal">SQLite</span>
+        <span class="tag tag-blue">Chart.js</span>
+        <span class="tag tag-gray">HTML/CSS/JS</span>
+      </div>
+      <a href="https://github.com/Hugorangel123/Dashboard-Gastos.git" target="_blank" class="project-link">Ver en GitHub →</a>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-top">
+        <span class="project-name">Nexora — Página corporativa ficticia</span>
+        <span class="project-status demo">Demo disponible</span>
+      </div>
+      <p class="project-desc">Diseño y maquetación de sitio web corporativo completo para empresa ficticia de tecnología. Incluye hero animado, secciones de servicios, equipo, estadísticas y formulario de contacto. Inspirado en diseño minimalista profesional.</p>
+      <div class="project-tags">
+        <span class="tag tag-gray">HTML</span>
+        <span class="tag tag-blue">CSS</span>
+        <span class="tag tag-amber">JavaScript</span>
+      </div>
+      <a href="nexora-empresa.html" class="project-link">Ver demo →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+  <div class="section-header">
+    <span class="section-title">Experiencia laboral</span>
+  </div>
+  <div class="exp-timeline">
+
+    <div class="exp-item reveal">
+      <div class="exp-item-top">
+        <span class="exp-role">Software Developer & Soporte TI</span>
+        <span class="exp-period current">Dic 2025 — Actualidad</span>
+      </div>
+      <div class="exp-company">Desarrollo Corporativo Integral del Norte, S.A. de R.L. de C.V.</div>
+      <p class="exp-desc">Desarrollo y mantenimiento de software a medida para procesos internos de la empresa, además de soporte técnico a usuarios y administración de infraestructura TI. Encargado de automatizar tareas operativas, dar mantenimiento preventivo y correctivo a equipos y sistemas, y brindar soporte de primer y segundo nivel al personal.</p>
+      <div class="exp-skills">
+        <span class="tag tag-blue">Desarrollo de software</span>
+        <span class="tag tag-gray">Soporte TI</span>
+        <span class="tag tag-teal">Automatización</span>
+        <span class="tag tag-amber">Infraestructura</span>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-item-top">
+        <span class="exp-role">Desarrollador (Becario)</span>
+        <span class="exp-period">May 2025 — Nov 2025</span>
+      </div>
+      <div class="exp-company">Aduasis Logística</div>
+      <p class="exp-desc">Desarrollo y mantenimiento de sistemas en el área de contabilidad usando PowerBuilder. Responsable de mejora de funcionalidades y trabajo interdepartamental. Adquirí conocimientos en el área financiera: órdenes de pago, pedimentos, reportes financieros y formato XML.</p>
+      <div class="exp-skills">
+        <span class="tag tag-blue">PowerBuilder 11.5–19</span>
+        <span class="tag tag-teal">Reportes financieros</span>
+        <span class="tag tag-gray">XML</span>
+        <span class="tag tag-purple">Trabajo en equipo</span>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-item-top">
+        <span class="exp-role">Auxiliar en Soporte TI</span>
+        <span class="exp-period">Ene 2025 — Jun 2025</span>
+      </div>
+      <div class="exp-company">Centro de Cómputo ITNLD — Servicio Social</div>
+      <p class="exp-desc">Mantenimiento preventivo y correctivo de equipos de cómputo, instalación y organización de cableado de redes, administración y control de inventario. Soporte técnico directo a maestros y alumnos.</p>
+      <div class="exp-skills">
+        <span class="tag tag-gray">Soporte TI</span>
+        <span class="tag tag-blue">Redes</span>
+        <span class="tag tag-amber">Hardware</span>
+        <span class="tag tag-teal">Inventario</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi">
+  <div class="section-header">
+    <span class="section-title">Sobre mí</span>
+  </div>
+  <div class="about-card reveal">
+    <p class="about-name">Hugo Rangel Madrigales</p>
+    <p class="about-role">Desarrollador Web · Automatización · Soporte TI</p>
+    <p class="about-text">Soy estudiante de Ingeniería en Sistemas Computacionales en el ITNLD, próximo a egresar en diciembre de 2026. Cuento con experiencia real en desarrollo de sistemas empresariales, automatización de procesos y soporte técnico. Me apasiona construir software que resuelva problemas concretos — desde sistemas de reportería financiera hasta aplicaciones web completas. Tengo disponibilidad de horario, muchas ganas de aprender y el compromiso de brindar soluciones eficientes.</p>
+
+    <div class="about-grid">
+      <div class="about-item">
+        <label>Institución</label>
+        <span>TECNM Campus Nuevo Laredo (ITNLD)</span>
+      </div>
+      <div class="about-item">
+        <label>Egreso</label>
+        <span>Diciembre 2026</span>
+      </div>
+      <div class="about-item">
+        <label>Carrera</label>
+        <span>Ing. en Sistemas Computacionales</span>
+      </div>
+      <div class="about-item">
+        <label>Ubicación</label>
+        <span>Nuevo Laredo, Tamaulipas</span>
+      </div>
+      <div class="about-item">
+        <label>Puesto actual</label>
+        <span>Software Developer & Soporte TI · Desarrollo Corporativo Integral del Norte</span>
+      </div>
+      <div class="about-item">
+        <label>Idiomas</label>
+        <span>Español nativo · Inglés técnico</span>
+      </div>
+    </div>
+
+    <div class="skills-section">
+      <div class="skill-group">
+        <label>Habilidades técnicas</label>
+        <div class="skill-tags">
+          <span class="tag tag-blue">C# / POO</span>
+          <span class="tag tag-blue">PowerBuilder</span>
+          <span class="tag tag-purple">Python</span>
+          <span class="tag tag-purple">Selenium</span>
+          <span class="tag tag-teal">SQL Server</span>
+          <span class="tag tag-teal">MySQL</span>
+          <span class="tag tag-teal">SQLite</span>
+          <span class="tag tag-gray">Docker</span>
+          <span class="tag tag-gray">Git & GitHub</span>
+          <span class="tag tag-amber">WinServer</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <label>Desarrollo web & herramientas</label>
+        <div class="skill-tags">
+          <span class="tag tag-blue">HTML / CSS</span>
+          <span class="tag tag-amber">JavaScript</span>
+          <span class="tag tag-purple">Flask</span>
+          <span class="tag tag-gray">Office completo</span>
+          <span class="tag tag-gray">Inglés técnico</span>
+          <span class="tag tag-teal">Redes & Cableado</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="soft-skills">
+      <span class="soft-label">Habilidades blandas</span>
+      <span class="soft-pill">Liderazgo</span>
+      <span class="soft-pill">Trabajo en equipo</span>
+      <span class="soft-pill">Comunicación efectiva</span>
+      <span class="soft-pill">Pensamiento creativo</span>
+      <span class="soft-pill">Adaptabilidad</span>
+      <span class="soft-pill">Trabajo bajo presión</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-header">
+    <span class="section-title">Contacto</span>
+  </div>
+  <div class="contact-card reveal">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:1.25rem;line-height:1.7">¿Tienes un proyecto en mente o quieres colaborar? Escríbeme por cualquiera de estos medios.</p>
+    <div class="contact-grid">
+      <a href="mailto:hr2780920@gmail.com" class="contact-item">
+        <span class="contact-label">Correo</span>
+        <span class="contact-value">hr2780920@gmail.com</span>
+      </a>
+      <a href="https://wa.me/528731033842" target="_blank" class="contact-item">
+        <span class="contact-label">WhatsApp</span>
+        <span class="contact-value">+52 873 103 3842</span>
+      </a>
+      <a href="https://github.com/Hugorangel123" target="_blank" class="contact-item">
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">github.com/Hugorangel123</span>
+      </a>
+      <a href="https://www.linkedin.com/in/hugo-rangel-madrigales-4b6563298/" target="_blank" class="contact-item">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">linkedin.com/in/hugo-rangel-madrigales</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Hugo Rangel Madrigales</strong> · Ing. en Sistemas Computacionales · Nuevo Laredo, Tamaulipas
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>

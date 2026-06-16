@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nexora — Soluciones Tecnológicas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F8F7F4;
+  --surface:#FFFFFF;
+  --ink:#0E0E0C;
+  --muted:#7A7A75;
+  --faint:#E6E4DE;
+  --accent:#1A56DB;
+  --accent-light:#EEF3FD;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3rem;background:rgba(248,247,244,0.88);backdrop-filter:blur(12px);border-bottom:0.5px solid transparent;transition:border-color 0.3s}
+nav.scrolled{border-bottom-color:var(--faint)}
+.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.03em;color:var(--ink);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;letter-spacing:0.01em}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink);color:#fff!important;padding:7px 18px;border-radius:6px;font-size:13px;font-weight:500;transition:opacity 0.2s!important}
+.nav-cta:hover{opacity:0.8}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--faint) 1px,transparent 1px),linear-gradient(90deg,var(--faint) 1px,transparent 1px);background-size:60px 60px;opacity:0.5}
+.hero-content{position:relative;max-width:760px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1.5rem;background:var(--accent-light);padding:5px 14px;border-radius:20px}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;line-height:0.95;letter-spacing:-0.04em;color:var(--ink);margin-bottom:2rem}
+.hero-title em{font-style:normal;color:var(--accent)}
+.hero-desc{font-size:17px;color:var(--muted);max-width:520px;line-height:1.75;margin-bottom:2.5rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{opacity:0.85}
+.btn-outline{border:0.5px solid var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+.hero-scroll{position:absolute;bottom:2rem;right:3rem;display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.hero-scroll-line{width:40px;height:0.5px;background:var(--muted)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:0.5px solid var(--faint);border-bottom:0.5px solid var(--faint)}
+.stat{padding:2.5rem 3rem;border-right:0.5px solid var(--faint)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:700;letter-spacing:-0.04em;color:var(--ink);line-height:1}
+.stat-num span{color:var(--accent)}
+.stat-label{font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:0.02em}
+
+/* QUIENES SOMOS */
+.section{padding:7rem 3rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:0}
+
+.quienes-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:4rem}
+.quienes-left p{font-size:16px;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1.25rem}
+.quienes-left p strong{color:var(--ink);font-weight:500}
+.valores-list{display:flex;flex-direction:column;gap:1px;border:0.5px solid var(--faint);border-radius:12px;overflow:hidden}
+.valor{padding:1.25rem 1.5rem;background:var(--surface);border-bottom:0.5px solid var(--faint);display:flex;align-items:flex-start;gap:1rem;transition:background 0.15s}
+.valor:last-child{border-bottom:none}
+.valor:hover{background:var(--accent-light)}
+.valor-icon{width:36px;height:36px;border-radius:8px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.valor-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.valor-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* SERVICIOS */
+.servicios{background:var(--ink);padding:7rem 3rem}
+.servicios .section-tag{color:#6B9BF4}
+.servicios .section-title{color:#fff}
+.servicios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;margin-top:4rem}
+.servicio{padding:2rem;background:var(--ink);transition:background 0.2s}
+.servicio:hover{background:#1a1a18}
+.serv-num{font-family:'Syne',sans-serif;font-size:11px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:1.25rem;font-weight:600}
+.serv-icon{font-size:24px;margin-bottom:1rem}
+.serv-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:0.5rem;letter-spacing:-0.02em}
+.serv-desc{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65}
+.serv-tag{display:inline-block;margin-top:1rem;font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);letter-spacing:0.04em}
+
+/* EQUIPO */
+.equipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4rem}
+.miembro{background:var(--surface);border:0.5px solid var(--faint);border-radius:12px;overflow:hidden;transition:border-color 0.2s}
+.miembro:hover{border-color:#aaa}
+.miembro-avatar{height:180px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:3rem;font-weight:700;letter-spacing:-0.04em}
+.av-blue{background:#EEF3FD;color:#1A56DB}
+.av-slate{background:#F0EEF8;color:#534AB7}
+.av-teal{background:#E1F5EE;color:#0F6E56}
+.miembro-info{padding:1.25rem}
+.miembro-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:600;letter-spacing:-0.02em;color:var(--ink)}
+.miembro-role{font-size:12px;color:var(--accent);font-weight:500;margin:3px 0 8px}
+.miembro-bio{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* CTA */
+.cta-section{padding:7rem 3rem;text-align:center}
+.cta-inner{max-width:600px;margin:0 auto}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-0.04em;line-height:1.05;margin-bottom:1.25rem;color:var(--ink)}
+.cta-title em{font-style:normal;color:var(--accent)}
+.cta-sub{font-size:16px;color:var(--muted);margin-bottom:2.5rem;font-weight:300}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.wa-float{position:fixed;bottom:2rem;right:2rem;background:#25D366;color:#fff;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(37,211,102,0.35);z-index:200;text-decoration:none;font-size:24px;transition:transform 0.2s}
+.wa-float:hover{transform:scale(1.1)}
+
+/* FOOTER */
+footer{border-top:0.5px solid var(--faint);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+footer strong{color:var(--ink);font-weight:500}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{color:var(--muted);text-decoration:none}
+.footer-links a:hover{color:var(--ink)}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem}
+  .hero{padding:0 1.25rem 4rem;min-height:100svh}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:1.5rem}
+  .section{padding:4rem 1.25rem}
+  .servicios{padding:4rem 1.25rem}
+  .quienes-grid{grid-template-columns:1fr;gap:2.5rem}
+  .servicios-grid{grid-template-columns:1fr}
+  .equipo-grid{grid-template-columns:1fr}
+  .cta-section{padding:4rem 1.25rem}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.25rem}
+  .nav-links{gap:1.25rem}
+  .hero-scroll{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">NEX<span>.</span>ORA</a>
+  <div class="nav-links">
+    <a href="#quienes">Quiénes somos</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#contacto" class="nav-cta">Contacto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Soluciones tecnológicas · Nuevo Laredo</div>
+    <h1 class="hero-title">Tecnología<br/>que <em>mueve</em><br/>negocios.</h1>
+    <p class="hero-desc">Desarrollamos sistemas a medida, automatizamos procesos y construimos infraestructura digital para empresas que quieren operar mejor.</p>
+    <div class="hero-actions">
+      <a href="#servicios" class="btn btn-dark">Ver servicios</a>
+      <a href="#contacto" class="btn btn-outline">Hablar con nosotros</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-line"></span>
+    Scroll
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">12<span>+</span></div>
+    <div class="stat-label">Proyectos entregados</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">8<span>+</span></div>
+    <div class="stat-label">Clientes activos</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">3<span>+</span></div>
+    <div class="stat-label">Años de experiencia</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">99<span>%</span></div>
+    <div class="stat-label">Satisfacción de clientes</div>
+  </div>
+</div>
+
+<!-- QUIÉNES SOMOS -->
+<section class="section" id="quienes">
+  <div class="section-inner">
+    <div class="section-tag reveal">Quiénes somos</div>
+    <h2 class="section-title reveal">Construimos el software<br/>que tu empresa necesita.</h2>
+    <div class="quienes-grid">
+      <div class="quienes-left reveal">
+        <p>Somos un equipo de ingenieros y desarrolladores con base en <strong>Nuevo Laredo, Tamaulipas</strong>, especializados en transformar procesos manuales y sistemas obsoletos en soluciones modernas, rápidas y confiables.</p>
+        <p>Nacimos de la convicción de que las empresas de la región merecen acceso a <strong>tecnología de calidad sin complicaciones</strong>. Desde sistemas de reportería financiera hasta automatización web, trabajamos de cerca con cada cliente para entender sus necesidades reales antes de escribir una sola línea de código.</p>
+        <p>Creemos que el software bien hecho <strong>no se nota</strong> — simplemente funciona.</p>
+      </div>
+      <div class="reveal">
+        <div class="valores-list">
+          <div class="valor">
+            <div class="valor-icon">⚡</div>
+            <div>
+              <div class="valor-name">Claridad antes que velocidad</div>
+              <div class="valor-desc">Entendemos el problema a fondo antes de proponer soluciones. Sin suposiciones.</div>
+            </div>
+          </div>
+          <div class="valor">
+            <div class="valor-icon">🔒</div>
+            <div>
+              <div class="valor-name">Código que dura</div>
+              <div class="valor-desc">Desarrollamos pensando en mantenimiento, escalabilidad y seguridad desde el día uno.</div>
+            </div>
+          </div>
+          <div class="valor">
+            <div class="valor-icon">🤝</div>
+            <div>
+              <div class="valor-name">Comunicación directa</div>
+              <div class="valor-desc">Sin intermediarios. Hablas directo con quien construye tu sistema.</div>
+            </div>
+          </div>
+          <div class="valor">
+            <div class="valor-icon">📍</div>
+            <div>
+              <div class="valor-name">Raíz local, visión global</div>
+              <div class="valor-desc">Conocemos el contexto de las empresas fronterizas y aplicamos estándares internacionales.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="section-inner">
+    <div class="section-tag reveal">Servicios</div>
+    <h2 class="section-title reveal">Lo que hacemos</h2>
+    <div class="servicios-grid reveal">
+      <div class="servicio">
+        <div class="serv-num">01</div>
+        <div class="serv-icon">🖥️</div>
+        <div class="serv-name">Desarrollo web</div>
+        <div class="serv-desc">Aplicaciones web a medida, dashboards interactivos y sistemas administrativos con tecnologías modernas.</div>
+        <span class="serv-tag">HTML · CSS · JS · Python</span>
+      </div>
+      <div class="servicio">
+        <div class="serv-num">02</div>
+        <div class="serv-icon">⚙️</div>
+        <div class="serv-name">Automatización</div>
+        <div class="serv-desc">Eliminamos tareas repetitivas: scraping, generación de reportes, integración entre sistemas y flujos automáticos.</div>
+        <span class="serv-tag">Python · Selenium · C#</span>
+      </div>
+      <div class="servicio">
+        <div class="serv-num">03</div>
+        <div class="serv-icon">📊</div>
+        <div class="serv-name">Reportería financiera</div>
+        <div class="serv-desc">Sistemas para procesar y visualizar datos financieros desde Excel o bases de datos, con estructuras dinámicas.</div>
+        <span class="serv-tag">C# · SQLite · Excel</span>
+      </div>
+      <div class="servicio">
+        <div class="serv-num">04</div>
+        <div class="serv-icon">🔐</div>
+        <div class="serv-name">Auditoría de seguridad</div>
+        <div class="serv-desc">Revisión de vulnerabilidades, análisis de redes y recomendaciones para proteger la infraestructura de tu empresa.</div>
+        <span class="serv-tag">Ciberseguridad · Redes</span>
+      </div>
+      <div class="servicio">
+        <div class="serv-num">05</div>
+        <div class="serv-icon">🗄️</div>
+        <div class="serv-name">Bases de datos</div>
+        <div class="serv-desc">Diseño, optimización y migración de bases de datos relacionales. SQL Server, MySQL, SQLite y Docker.</div>
+        <span class="serv-tag">SQL Server · MySQL · Docker</span>
+      </div>
+      <div class="servicio">
+        <div class="serv-num">06</div>
+        <div class="serv-icon">🖧</div>
+        <div class="serv-name">Soporte TI & servidores</div>
+        <div class="serv-desc">Mantenimiento de equipos, administración de servidores Windows y soporte técnico para equipos de trabajo.</div>
+        <span class="serv-tag">WinServer · Redes · Hardware</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section class="section" id="equipo">
+  <div class="section-inner">
+    <div class="section-tag reveal">El equipo</div>
+    <h2 class="section-title reveal">Personas detrás del código</h2>
+    <div class="equipo-grid">
+      <div class="miembro reveal">
+        <div class="miembro-avatar av-blue">HR</div>
+        <div class="miembro-info">
+          <div class="miembro-name">Hugo Rangel</div>
+          <div class="miembro-role">Fundador & Desarrollador Principal</div>
+          <div class="miembro-bio">Ing. en Sistemas Computacionales con experiencia en desarrollo web, automatización y sistemas financieros. Apasionado por construir software que resuelve problemas reales.</div>
+        </div>
+      </div>
+      <div class="miembro reveal">
+        <div class="miembro-avatar av-slate">AM</div>
+        <div class="miembro-info">
+          <div class="miembro-name">Ana Martínez</div>
+          <div class="miembro-role">Diseñadora UI/UX</div>
+          <div class="miembro-bio">Especialista en interfaces digitales centradas en el usuario. Transforma requerimientos complejos en experiencias simples e intuitivas.</div>
+        </div>
+      </div>
+      <div class="miembro reveal">
+        <div class="miembro-avatar av-teal">LC</div>
+        <div class="miembro-info">
+          <div class="miembro-name">Luis Contreras</div>
+          <div class="miembro-role">Infraestructura & Seguridad</div>
+          <div class="miembro-bio">Responsable de la arquitectura de servidores, redes y auditorías de ciberseguridad. Garantiza que los sistemas sean robustos y seguros.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-inner">
+    <div class="section-tag reveal" style="text-align:center;display:block">Contacto</div>
+    <h2 class="cta-title reveal">¿Tienes un proyecto<br/>en <em>mente</em>?</h2>
+    <p class="cta-sub reveal">Cuéntanos qué necesitas y te respondemos en menos de 24 horas.</p>
+    <div class="cta-btns reveal">
+      <a href="https://wa.me/528731033842" target="_blank" class="btn btn-dark">WhatsApp directo</a>
+      <a href="mailto:hr2780920@gmail.com" class="btn btn-outline">Enviar correo</a>
+    </div>
+  </div>
+</section>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/528731033842" class="wa-float" target="_blank" title="Contactar por WhatsApp">💬</a>
+
+<footer>
+  <strong>Nexora</strong> — Soluciones Tecnológicas · Nuevo Laredo, Tamaulipas
+  <div class="footer-links">
+    <a href="#quienes">Quiénes somos</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
