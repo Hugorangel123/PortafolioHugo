@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<title>Salinas & Vega Abogados — Despacho Legal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF8F3;
+  --surface:#FFFFFF;
+  --ink:#11151D;
+  --navy:#152A4A;
+  --navy-deep:#0C1B30;
+  --muted:#6E6F72;
+  --faint:#E8E3D6;
+  --gold:#9C7A3C;
+  --gold-light:#F4ECDA;
+  --gold-bright:#D8B978;
+  --font-display:'Playfair Display',serif;
+  --font-body:'Inter',sans-serif;
+}
+html,body{height:100%}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:0.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* APP SHELL */
+.app-shell{display:flex;height:100vh}
+
+/* SIDEBAR */
+.sidebar{width:300px;flex-shrink:0;height:100vh;position:sticky;top:0;background:var(--navy-deep);display:flex;flex-direction:column;overflow-y:auto}
+.sidebar-logo{padding:2.25rem 2rem 0.25rem;font-family:var(--font-display);font-size:21px;font-weight:600;color:#fff;letter-spacing:-0.01em}
+.sidebar-logo em{font-style:italic;color:var(--gold-bright)}
+.sidebar-est{padding:0 2rem;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.04em;margin-bottom:2.25rem}
+
+.tab-nav{display:flex;flex-direction:column;flex:1}
+.tab-btn{display:flex;align-items:baseline;gap:11px;text-align:left;background:none;border:none;border-left:3px solid transparent;color:rgba(255,255,255,0.55);font-family:var(--font-body);font-size:14px;padding:14px 1.75rem;cursor:pointer;transition:all 0.2s;width:100%}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,0.04)}
+.tab-btn.active{color:#fff;background:rgba(255,255,255,0.07);border-left-color:var(--gold-bright)}
+.tab-num{font-family:var(--font-display);font-style:italic;color:var(--gold-bright);font-size:13px;flex-shrink:0}
+
+.sidebar-footer{padding:1.5rem 2rem 2rem;border-top:0.5px solid rgba(255,255,255,0.12);margin-top:0.5rem}
+.sidebar-footer-label{font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.35);margin-bottom:10px}
+.sidebar-contact{display:flex;flex-direction:column;gap:8px}
+.sidebar-contact a{color:rgba(255,255,255,0.82);font-size:13px;text-decoration:none;transition:color 0.2s}
+.sidebar-contact a:hover{color:var(--gold-bright)}
+
+/* CONTENT */
+.content{flex:1;height:100vh;overflow-y:auto;position:relative;background:var(--bg)}
+.panel{display:none;padding:5rem 4.5rem;min-height:100%;position:relative}
+.panel.active{display:block;animation:panelIn 0.45s ease}
+@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.panel-inner{max-width:780px;position:relative;z-index:1}
+.panel-inner.wide{max-width:1040px}
+.panel-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:1rem}
+.panel-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.1rem);font-weight:600;letter-spacing:-0.02em;line-height:1.14;color:var(--navy);margin-bottom:1.5rem}
+.panel-title em{font-style:italic;color:var(--gold)}
+
+/* PANEL: DARK VARIANT (areas de practica) */
+.panel.dark{background:var(--navy-deep)}
+.panel.dark .panel-label{color:var(--gold-bright)}
+.panel.dark .panel-title{color:#fff}
+
+/* INICIO */
+.inicio-mark{position:absolute;right:0%;top:-4%;font-family:var(--font-display);font-size:30rem;font-weight:600;color:var(--navy);opacity:0.045;line-height:1;pointer-events:none;z-index:0;user-select:none}
+.inicio-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);font-weight:500;margin-bottom:1.5rem;background:var(--gold-light);padding:5px 14px;border-radius:20px}
+.inicio-title{font-family:var(--font-display);font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:600;line-height:1.1;letter-spacing:-0.02em;color:var(--navy);margin-bottom:1.5rem}
+.inicio-title em{font-style:italic;font-weight:600;color:var(--gold)}
+.inicio-desc{font-size:16px;color:var(--muted);max-width:520px;line-height:1.75;margin-bottom:2.25rem;font-weight:300}
+.inicio-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn{display:inline-block;padding:12px 26px;border-radius:7px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:all 0.2s;font-family:var(--font-body);border:none}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-dark:hover{opacity:0.88;transform:translateY(-2px)}
+.btn-outline{border:0.5px solid var(--navy);color:var(--navy);background:transparent}
+.btn-outline:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
+.inicio-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--faint);border:0.5px solid var(--faint);border-radius:10px;overflow:hidden;max-width:660px}
+.inicio-stat{background:var(--surface);padding:1.1rem 1.1rem}
+.inicio-stat-num{font-family:var(--font-display);font-size:1.7rem;font-weight:600;color:var(--navy);line-height:1}
+.inicio-stat-num em{font-style:italic;color:var(--gold)}
+.inicio-stat-label{font-size:10.5px;color:var(--muted);margin-top:4px}
+
+/* NOSOTROS */
+.quienes-left p{font-size:15.5px;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:1.25rem}
+.quienes-left p strong{color:var(--navy);font-weight:500;font-style:italic;font-family:var(--font-display)}
+.valores-list{display:flex;flex-direction:column;gap:1px;border:0.5px solid var(--faint);border-radius:12px;overflow:hidden;margin-top:2.5rem}
+.valor{padding:1.1rem 1.4rem;background:var(--surface);border-bottom:0.5px solid var(--faint);display:flex;align-items:flex-start;gap:1rem;transition:background 0.15s}
+.valor:last-child{border-bottom:none}
+.valor:hover{background:var(--gold-light)}
+.valor-mark{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:17px;color:var(--gold);width:26px;flex-shrink:0}
+.valor-name{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.valor-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* AREAS DE PRACTICA */
+.practica-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;margin-top:2.5rem}
+.area{padding:1.75rem;background:var(--navy-deep);transition:background 0.2s}
+.area:hover{background:#102036}
+.area-num{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:15px;color:var(--gold-bright);margin-bottom:1.1rem}
+.area-name{font-family:var(--font-display);font-size:17px;font-weight:600;color:#fff;margin-bottom:0.5rem;letter-spacing:-0.01em}
+.area-desc{font-size:12.5px;color:rgba(255,255,255,0.55);line-height:1.65}
+
+/* EQUIPO */
+.equipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:2.5rem}
+.miembro{background:var(--surface);border:0.5px solid var(--faint);border-radius:12px;overflow:hidden;transition:border-color 0.2s}
+.miembro:hover{border-color:#B7AE9A}
+.miembro-avatar{height:150px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:2.6rem;font-weight:600;letter-spacing:-0.02em;font-style:italic}
+.av-navy{background:#E8EDF5;color:var(--navy)}
+.av-gold{background:var(--gold-light);color:var(--gold)}
+.av-ink{background:#ECEAE4;color:var(--ink)}
+.miembro-info{padding:1.1rem}
+.miembro-name{font-family:var(--font-display);font-size:16px;font-weight:600;letter-spacing:-0.01em;color:var(--navy)}
+.miembro-role{font-size:10.5px;color:var(--gold);font-weight:600;margin:5px 0 8px;letter-spacing:0.02em;text-transform:uppercase}
+.miembro-bio{font-size:11.5px;color:var(--muted);line-height:1.6}
+
+/* TESTIMONIOS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:2.5rem}
+.testi-card{background:var(--surface);border:0.5px solid var(--faint);border-radius:12px;padding:1.6rem}
+.testi-mark{font-family:var(--font-display);font-style:italic;font-size:38px;color:var(--gold);line-height:1;margin-bottom:0.4rem}
+.testi-quote{font-family:var(--font-display);font-style:italic;font-size:14.5px;color:var(--ink);line-height:1.55;margin-bottom:1.1rem}
+.testi-author{font-size:12px;font-weight:600;color:var(--navy)}
+.testi-role{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* CONTACTO */
+.contacto-sub{font-size:15.5px;color:var(--muted);margin-bottom:2.25rem;font-weight:300;max-width:480px}
+.contacto-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.contacto-foot{font-size:12px;color:var(--muted);border-top:0.5px solid var(--faint);padding-top:1.5rem;margin-top:1rem}
+.contacto-foot strong{color:var(--navy);font-family:var(--font-display);font-style:italic;font-weight:600}
+
+.wa-float{position:fixed;bottom:2rem;right:2rem;background:#25D366;color:#fff;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(37,211,102,0.35);z-index:200;text-decoration:none;font-size:24px;transition:transform 0.2s}
+.wa-float:hover{transform:scale(1.1)}
+
+@media(max-width:880px){
+  .app-shell{flex-direction:column;height:auto}
+  .sidebar{width:100%;height:auto;position:relative;flex-direction:column;padding-bottom:0}
+  .sidebar-logo{padding:1.5rem 1.25rem 0.25rem}
+  .sidebar-est{padding:0 1.25rem;margin-bottom:1.25rem}
+  .tab-nav{flex-direction:row;overflow-x:auto;flex:none}
+  .tab-btn{white-space:nowrap;border-left:none;border-bottom:3px solid transparent;padding:12px 16px}
+  .tab-btn.active{border-left:none;border-bottom-color:var(--gold-bright)}
+  .sidebar-footer{display:none}
+  .content{height:auto;overflow-y:visible}
+  .panel{padding:2.5rem 1.25rem;min-height:auto}
+  .inicio-mark{font-size:12rem;opacity:0.035}
+  .inicio-stats{grid-template-columns:1fr 1fr}
+  .practica-grid,.equipo-grid,.testi-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- SIDEBAR / EXPEDIENTE NAV -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">Salinas <em>&</em> Vega</div>
+    <div class="sidebar-est">Despacho Legal · Desde 2011</div>
+
+    <nav class="tab-nav" id="tabNav">
+      <button class="tab-btn active" data-tab="inicio"><span class="tab-num">I.</span> Inicio</button>
+      <button class="tab-btn" data-tab="nosotros"><span class="tab-num">II.</span> Quiénes Somos</button>
+      <button class="tab-btn" data-tab="practica"><span class="tab-num">III.</span> Áreas de Práctica</button>
+      <button class="tab-btn" data-tab="equipo"><span class="tab-num">IV.</span> Equipo</button>
+      <button class="tab-btn" data-tab="testimonios"><span class="tab-num">V.</span> Testimonios</button>
+      <button class="tab-btn" data-tab="contacto"><span class="tab-num">VI.</span> Contacto</button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-label">Contacto directo</div>
+      <div class="sidebar-contact">
+        <a href="https://wa.me/528731033842" target="_blank" rel="noopener noreferrer">WhatsApp: +52 873 103 3842</a>
+        <a href="mailto:hr2780920@gmail.com">hr2780920@gmail.com</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT PANELS -->
+  <main class="content" id="content">
+
+    <!-- I. INICIO -->
+    <section class="panel active" id="panel-inicio">
+      <div class="inicio-mark">§</div>
+      <div class="panel-inner">
+        <div class="inicio-eyebrow">Despacho Legal · Nuevo Laredo, Tamaulipas</div>
+        <h1 class="inicio-title">Respaldo legal<br/>con resultados <em>comprobados</em>.</h1>
+        <p class="inicio-desc">Asesoría jurídica integral para empresas y familias de la frontera. Comercio exterior, derecho corporativo y litigio civil — con la experiencia que tu caso merece.</p>
+        <div class="inicio-actions">
+          <button class="btn btn-dark" onclick="showTab('contacto')">Agendar consulta</button>
+          <button class="btn btn-outline" onclick="showTab('nosotros')">Conocer el despacho</button>
+        </div>
+        <div class="inicio-stats">
+          <div class="inicio-stat">
+            <div class="inicio-stat-num">15<em>+</em></div>
+            <div class="inicio-stat-label">Años de experiencia</div>
+          </div>
+          <div class="inicio-stat">
+            <div class="inicio-stat-num">500<em>+</em></div>
+            <div class="inicio-stat-label">Casos atendidos</div>
+          </div>
+          <div class="inicio-stat">
+            <div class="inicio-stat-num">98<em>%</em></div>
+            <div class="inicio-stat-label">Resol. favorables</div>
+          </div>
+          <div class="inicio-stat">
+            <div class="inicio-stat-num">120<em>+</em></div>
+            <div class="inicio-stat-label">Empresas asesoradas</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- II. QUIENES SOMOS -->
+    <section class="panel" id="panel-nosotros">
+      <div class="panel-inner">
+        <div class="panel-label">Quiénes somos</div>
+        <h2 class="panel-title">Defendemos tus intereses<br/>con rigor y cercanía.</h2>
+        <div class="quienes-left">
+          <p>Somos un despacho legal con base en <strong>Nuevo Laredo, Tamaulipas</strong>, especializado en acompañar a empresas y familias de la frontera en sus decisiones más importantes — desde una operación de comercio exterior hasta la defensa de su patrimonio.</p>
+          <p>Combinamos el rigor técnico que exige cada materia con una atención directa y honesta: te explicamos tu caso en <strong>términos claros</strong>, sin tecnicismos innecesarios, y te acompañamos en cada etapa del proceso.</p>
+          <p>Creemos que la mejor asesoría legal es la que <strong>se anticipa</strong> a los problemas, no la que solo los resuelve.</p>
+        </div>
+        <div class="valores-list">
+          <div class="valor">
+            <span class="valor-mark">I.</span>
+            <div>
+              <div class="valor-name">Integridad y confidencialidad</div>
+              <div class="valor-desc">Tu información y tu caso se manejan con la discreción que merecen, siempre.</div>
+            </div>
+          </div>
+          <div class="valor">
+            <span class="valor-mark">II.</span>
+            <div>
+              <div class="valor-name">Atención personalizada</div>
+              <div class="valor-desc">Cada cliente tiene un abogado responsable directo, no una mesa de turnos.</div>
+            </div>
+          </div>
+          <div class="valor">
+            <span class="valor-mark">III.</span>
+            <div>
+              <div class="valor-name">Resultados medibles</div>
+              <div class="valor-desc">Te damos plazos realistas y reportamos avances, no promesas vacías.</div>
+            </div>
+          </div>
+          <div class="valor">
+            <span class="valor-mark">IV.</span>
+            <div>
+              <div class="valor-name">Conocimiento de la frontera</div>
+              <div class="valor-desc">Entendemos la dinámica comercial y aduanera de Nuevo Laredo como pocos despachos.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- III. AREAS DE PRACTICA -->
+    <section class="panel dark" id="panel-practica">
+      <div class="panel-inner wide">
+        <div class="panel-label">Áreas de práctica</div>
+        <h2 class="panel-title">En qué te ayudamos</h2>
+        <div class="practica-grid">
+          <div class="area">
+            <div class="area-num">01.</div>
+            <div class="area-name">Derecho Corporativo y Comercial</div>
+            <div class="area-desc">Constitución de sociedades, contratos, fusiones y gobierno corporativo para empresas en crecimiento.</div>
+          </div>
+          <div class="area">
+            <div class="area-num">02.</div>
+            <div class="area-name">Comercio Exterior y Aduanas</div>
+            <div class="area-desc">Asesoría en pedimentos, regímenes aduaneros, IMMEX y cumplimiento ante autoridades comerciales.</div>
+          </div>
+          <div class="area">
+            <div class="area-num">03.</div>
+            <div class="area-name">Derecho Migratorio</div>
+            <div class="area-desc">Trámites de visas, residencia y regularización migratoria para personas y trabajadores transfronterizos.</div>
+          </div>
+          <div class="area">
+            <div class="area-num">04.</div>
+            <div class="area-name">Litigio Civil y Mercantil</div>
+            <div class="area-desc">Representación en juicios civiles, mercantiles y procedimientos de cobranza judicial.</div>
+          </div>
+          <div class="area">
+            <div class="area-num">05.</div>
+            <div class="area-name">Derecho Laboral</div>
+            <div class="area-desc">Defensa patronal y asesoría en contratación, despidos y cumplimiento de obligaciones laborales.</div>
+          </div>
+          <div class="area">
+            <div class="area-num">06.</div>
+            <div class="area-name">Consultoría Legal Empresarial</div>
+            <div class="area-desc">Acompañamiento jurídico continuo para la toma de decisiones estratégicas de tu negocio.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IV. EQUIPO -->
+    <section class="panel" id="panel-equipo">
+      <div class="panel-inner wide">
+        <div class="panel-label">El equipo</div>
+        <h2 class="panel-title">Abogados detrás de cada caso</h2>
+        <div class="equipo-grid">
+          <div class="miembro">
+            <div class="miembro-avatar av-navy">RS</div>
+            <div class="miembro-info">
+              <div class="miembro-name">Roberto Salinas Treviño</div>
+              <div class="miembro-role">Socio Fundador · Comercio Exterior</div>
+              <div class="miembro-bio">Más de 15 años asesorando empresas exportadoras e importadoras en la frontera norte. Especialista en regímenes aduaneros.</div>
+            </div>
+          </div>
+          <div class="miembro">
+            <div class="miembro-avatar av-gold">PV</div>
+            <div class="miembro-info">
+              <div class="miembro-name">Patricia Vega Cantú</div>
+              <div class="miembro-role">Socia · Litigio Civil y Mercantil</div>
+              <div class="miembro-bio">Litigante con amplia experiencia en juicios mercantiles y civiles. Enfocada en soluciones rápidas y favorables para sus clientes.</div>
+            </div>
+          </div>
+          <div class="miembro">
+            <div class="miembro-avatar av-ink">FR</div>
+            <div class="miembro-info">
+              <div class="miembro-name">Fernando Ríos</div>
+              <div class="miembro-role">Asociado Senior · Migratorio y Laboral</div>
+              <div class="miembro-bio">Acompaña a empresas y trabajadores transfronterizos en procesos migratorios y laborales complejos.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- V. TESTIMONIOS -->
+    <section class="panel" id="panel-testimonios">
+      <div class="panel-inner wide">
+        <div class="panel-label">Lo que dicen de nosotros</div>
+        <h2 class="panel-title">Confianza, caso por caso</h2>
+        <div class="testi-grid">
+          <div class="testi-card">
+            <div class="testi-mark">“</div>
+            <p class="testi-quote">Nos ayudaron a resolver un problema aduanero que llevaba meses detenido. Profesionales y directos en todo momento.</p>
+            <div class="testi-author">Empresa importadora</div>
+            <div class="testi-role">Nuevo Laredo, Tamaulipas</div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-mark">“</div>
+            <p class="testi-quote">La atención fue cercana desde el primer día. Sentí que mi caso era prioridad, no un expediente más.</p>
+            <div class="testi-author">Cliente particular</div>
+            <div class="testi-role">Litigio civil</div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-mark">“</div>
+            <p class="testi-quote">Su conocimiento de comercio exterior nos ahorró tiempo y dinero en una operación compleja de importación.</p>
+            <div class="testi-author">Director de logística</div>
+            <div class="testi-role">Empresa manufacturera</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VI. CONTACTO -->
+    <section class="panel" id="panel-contacto">
+      <div class="panel-inner">
+        <div class="panel-label">Contacto</div>
+        <h2 class="panel-title">¿Necesitas asesoría<br/>legal <em>hoy</em>?</h2>
+        <p class="contacto-sub">Agenda una consulta inicial y platiquemos sobre tu caso, sin compromiso.</p>
+        <div class="contacto-btns">
+          <a href="https://wa.me/528731033842" target="_blank" rel="noopener noreferrer" class="btn btn-dark">WhatsApp directo</a>
+          <a href="mailto:hr2780920@gmail.com" class="btn btn-outline">Enviar correo</a>
+        </div>
+        <div class="contacto-foot"><strong>Salinas & Vega</strong> — Despacho Legal · Nuevo Laredo, Tamaulipas</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/528731033842" class="wa-float" target="_blank" rel="noopener noreferrer" title="Contactar por WhatsApp">💬</a>
+
+<script>
+function showTab(name){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active', p.id === 'panel-'+name));
+  document.getElementById('content').scrollTop = 0;
+}
+document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click', ()=>showTab(b.dataset.tab)));
+</script>
+</body>
+</html>
