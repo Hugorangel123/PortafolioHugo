@@ -115,8 +115,8 @@ nav{background:var(--surface);border-bottom:0.5px solid var(--border);padding:1r
 .t1-exp-role{font-size:13px;font-weight:600;color:#18181A}
 .t1-exp-company{font-size:12px;color:#2563EB;margin-bottom:3px}
 .t1-exp-period{font-size:11px;color:#6B6B6F;margin-bottom:5px}
-.t1-exp-desc{font-size:12px;color:#3F3F44;line-height:1.65}
-.t1-about{font-size:12px;color:#3F3F44;line-height:1.7;margin-bottom:1.25rem}
+.t1-exp-desc{font-size:12px;color:#3F3F44;line-height:1.65;white-space:pre-wrap}
+.t1-about{font-size:12px;color:#3F3F44;line-height:1.7;margin-bottom:1.25rem;white-space:pre-wrap}
 .t1-soft{display:flex;flex-direction:column;gap:3px}
 .t1-soft-item{font-size:11px;color:#3F3F44;padding-left:10px;position:relative}
 .t1-soft-item::before{content:'·';position:absolute;left:0;color:#2563EB}
@@ -139,8 +139,8 @@ nav{background:var(--surface);border-bottom:0.5px solid var(--border);padding:1r
 .t2-exp-role{font-size:13px;font-weight:600;color:#F1F5F9}
 .t2-exp-company{font-size:12px;color:#60A5FA;margin-bottom:3px}
 .t2-exp-period{font-size:11px;color:#64748B;margin-bottom:5px}
-.t2-exp-desc{font-size:12px;color:#CBD5E1;line-height:1.65}
-.t2-about{font-size:12px;color:#CBD5E1;line-height:1.7;margin-bottom:1.25rem}
+.t2-exp-desc{font-size:12px;color:#CBD5E1;line-height:1.65;white-space:pre-wrap}
+.t2-about{font-size:12px;color:#CBD5E1;line-height:1.7;margin-bottom:1.25rem;white-space:pre-wrap}
 .t2-soft-item{font-size:11px;color:#CBD5E1;padding-left:10px;position:relative;margin-bottom:3px}
 .t2-soft-item::before{content:'·';position:absolute;left:0;color:#60A5FA}
 
@@ -161,12 +161,12 @@ nav{background:var(--surface);border-bottom:0.5px solid var(--border);padding:1r
 .t3-main{padding:2rem 1.75rem}
 .t3-section-title{font-size:10px;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;color:#2563EB;margin-bottom:0.75rem;margin-top:1.25rem;padding-bottom:4px;border-bottom:2px solid #EFF4FF}
 .t3-section-title:first-child{margin-top:0}
-.t3-about{font-size:12px;color:#3F3F44;line-height:1.7}
+.t3-about{font-size:12px;color:#3F3F44;line-height:1.7;white-space:pre-wrap}
 .t3-exp{margin-bottom:1rem}
 .t3-exp-role{font-size:13px;font-weight:600;color:#18181A}
 .t3-exp-company{font-size:11px;color:#2563EB}
 .t3-exp-period{font-size:11px;color:#6B6B6F;margin-bottom:4px}
-.t3-exp-desc{font-size:12px;color:#3F3F44;line-height:1.65}
+.t3-exp-desc{font-size:12px;color:#3F3F44;line-height:1.65;white-space:pre-wrap}
 .t3-edu{margin-bottom:0.75rem}
 .t3-edu-deg{font-size:12px;font-weight:600;color:#18181A}
 .t3-edu-school{font-size:11px;color:#6B6B6F}
@@ -349,6 +349,7 @@ const DEFAULT = {
 
 function val(id){ return document.getElementById(id)?.value || ''; }
 function setVal(id, v){ const el = document.getElementById(id); if(el) el.value = v; }
+function esc(s){ return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 function getData(){
   return {
@@ -364,20 +365,20 @@ function getData(){
 
 // ─── TEMPLATES ───────────────────────────────────────────────
 function tpl1(d){
-  const skills = d.skills.map(s=>`<span class="t1-skill">${s}</span>`).join('');
-  const soft = d.soft.map(s=>`<div class="t1-soft-item">${s}</div>`).join('');
-  const exp = d.exp.map(e=>`<div class="t1-exp"><div class="t1-exp-role">${e.role}</div><div class="t1-exp-company">${e.company}</div><div class="t1-exp-period">${e.period}</div><div class="t1-exp-desc">${e.desc}</div></div>`).join('');
-  const edu = d.edu.map(e=>`<div class="t1-edu"><div class="t1-edu-deg">${e.degree}</div><div class="t1-edu-school">${e.school}</div><div class="t1-edu-year">${e.year}</div></div>`).join('');
+  const skills = d.skills.map(s=>`<span class="t1-skill">${esc(s)}</span>`).join('');
+  const soft = d.soft.map(s=>`<div class="t1-soft-item">${esc(s)}</div>`).join('');
+  const exp = d.exp.map(e=>`<div class="t1-exp"><div class="t1-exp-role">${esc(e.role)}</div><div class="t1-exp-company">${esc(e.company)}</div><div class="t1-exp-period">${esc(e.period)}</div><div class="t1-exp-desc">${esc(e.desc)}</div></div>`).join('');
+  const edu = d.edu.map(e=>`<div class="t1-edu"><div class="t1-edu-deg">${esc(e.degree)}</div><div class="t1-edu-school">${esc(e.school)}</div><div class="t1-edu-year">${esc(e.year)}</div></div>`).join('');
   return `<div class="cv-t1">
     <div class="t1-header">
-      <div class="t1-name">${d.name}</div>
-      <div class="t1-role">${d.role}</div>
+      <div class="t1-name">${esc(d.name)}</div>
+      <div class="t1-role">${esc(d.role)}</div>
       <div class="t1-contacts">
-        ${d.email?`<span class="t1-contact">✉ ${d.email}</span>`:''}
-        ${d.phone?`<span class="t1-contact">📞 ${d.phone}</span>`:''}
-        ${d.location?`<span class="t1-contact">📍 ${d.location}</span>`:''}
-        ${d.linkedin?`<span class="t1-contact">in ${d.linkedin}</span>`:''}
-        ${d.github?`<span class="t1-contact">⌥ ${d.github}</span>`:''}
+        ${d.email?`<span class="t1-contact">✉ ${esc(d.email)}</span>`:''}
+        ${d.phone?`<span class="t1-contact">📞 ${esc(d.phone)}</span>`:''}
+        ${d.location?`<span class="t1-contact">📍 ${esc(d.location)}</span>`:''}
+        ${d.linkedin?`<span class="t1-contact">in ${esc(d.linkedin)}</span>`:''}
+        ${d.github?`<span class="t1-contact">⌥ ${esc(d.github)}</span>`:''}
       </div>
     </div>
     <div class="t1-body">
@@ -390,7 +391,7 @@ function tpl1(d){
         <div class="t1-soft">${soft}</div>
       </div>
       <div>
-        ${d.about?`<div class="t1-section-title">Perfil</div><div class="t1-about">${d.about}</div>`:''}
+        ${d.about?`<div class="t1-section-title">Perfil</div><div class="t1-about">${esc(d.about)}</div>`:''}
         <div class="t1-section-title">Experiencia</div>
         ${exp}
       </div>
@@ -399,20 +400,20 @@ function tpl1(d){
 }
 
 function tpl2(d){
-  const skills = d.skills.map(s=>`<span class="t2-skill">${s}</span>`).join('');
-  const soft = d.soft.map(s=>`<div class="t2-soft-item">${s}</div>`).join('');
-  const exp = d.exp.map(e=>`<div class="t2-exp"><div class="t2-exp-role">${e.role}</div><div class="t2-exp-company">${e.company}</div><div class="t2-exp-period">${e.period}</div><div class="t2-exp-desc">${e.desc}</div></div>`).join('');
-  const edu = d.edu.map(e=>`<div class="t2-edu"><div class="t2-edu-deg">${e.degree}</div><div class="t2-edu-school">${e.school}</div><div class="t2-edu-year">${e.year}</div></div>`).join('');
+  const skills = d.skills.map(s=>`<span class="t2-skill">${esc(s)}</span>`).join('');
+  const soft = d.soft.map(s=>`<div class="t2-soft-item">${esc(s)}</div>`).join('');
+  const exp = d.exp.map(e=>`<div class="t2-exp"><div class="t2-exp-role">${esc(e.role)}</div><div class="t2-exp-company">${esc(e.company)}</div><div class="t2-exp-period">${esc(e.period)}</div><div class="t2-exp-desc">${esc(e.desc)}</div></div>`).join('');
+  const edu = d.edu.map(e=>`<div class="t2-edu"><div class="t2-edu-deg">${esc(e.degree)}</div><div class="t2-edu-school">${esc(e.school)}</div><div class="t2-edu-year">${esc(e.year)}</div></div>`).join('');
   return `<div class="cv-t2">
     <div class="t2-header">
-      <div class="t2-name">${d.name}</div>
-      <div class="t2-role">${d.role}</div>
+      <div class="t2-name">${esc(d.name)}</div>
+      <div class="t2-role">${esc(d.role)}</div>
       <div class="t2-contacts">
-        ${d.email?`<span class="t2-contact">✉ ${d.email}</span>`:''}
-        ${d.phone?`<span class="t2-contact">📞 ${d.phone}</span>`:''}
-        ${d.location?`<span class="t2-contact">📍 ${d.location}</span>`:''}
-        ${d.linkedin?`<span class="t2-contact">in ${d.linkedin}</span>`:''}
-        ${d.github?`<span class="t2-contact">⌥ ${d.github}</span>`:''}
+        ${d.email?`<span class="t2-contact">✉ ${esc(d.email)}</span>`:''}
+        ${d.phone?`<span class="t2-contact">📞 ${esc(d.phone)}</span>`:''}
+        ${d.location?`<span class="t2-contact">📍 ${esc(d.location)}</span>`:''}
+        ${d.linkedin?`<span class="t2-contact">in ${esc(d.linkedin)}</span>`:''}
+        ${d.github?`<span class="t2-contact">⌥ ${esc(d.github)}</span>`:''}
       </div>
     </div>
     <div class="t2-body">
@@ -425,7 +426,7 @@ function tpl2(d){
         ${soft}
       </div>
       <div>
-        ${d.about?`<div class="t2-section-title">Perfil</div><div class="t2-about">${d.about}</div>`:''}
+        ${d.about?`<div class="t2-section-title">Perfil</div><div class="t2-about">${esc(d.about)}</div>`:''}
         <div class="t2-section-title">Experiencia</div>
         ${exp}
       </div>
@@ -437,29 +438,29 @@ function tpl3(d){
   const ini = d.name ? d.name.split(' ').slice(0,2).map(w=>w[0]).join('') : 'HR';
   const skills = d.skills.slice(0,8).map((s,i)=>{
     const w = [90,85,80,75,85,70,80,75][i]||70;
-    return `<div class="t3-skill-bar"><div class="t3-skill-name">${s}</div><div class="t3-skill-track"><div class="t3-skill-fill" style="width:${w}%"></div></div></div>`;
+    return `<div class="t3-skill-bar"><div class="t3-skill-name">${esc(s)}</div><div class="t3-skill-track"><div class="t3-skill-fill" style="width:${w}%"></div></div></div>`;
   }).join('');
-  const soft = d.soft.map(s=>`<div class="t3-soft-item">${s}</div>`).join('');
-  const exp = d.exp.map(e=>`<div class="t3-exp"><div class="t3-exp-role">${e.role}</div><div class="t3-exp-company">${e.company}</div><div class="t3-exp-period">${e.period}</div><div class="t3-exp-desc">${e.desc}</div></div>`).join('');
-  const edu = d.edu.map(e=>`<div class="t3-edu"><div class="t3-edu-deg">${e.degree}</div><div class="t3-edu-school">${e.school}</div><div class="t3-edu-year">${e.year}</div></div>`).join('');
+  const soft = d.soft.map(s=>`<div class="t3-soft-item">${esc(s)}</div>`).join('');
+  const exp = d.exp.map(e=>`<div class="t3-exp"><div class="t3-exp-role">${esc(e.role)}</div><div class="t3-exp-company">${esc(e.company)}</div><div class="t3-exp-period">${esc(e.period)}</div><div class="t3-exp-desc">${esc(e.desc)}</div></div>`).join('');
+  const edu = d.edu.map(e=>`<div class="t3-edu"><div class="t3-edu-deg">${esc(e.degree)}</div><div class="t3-edu-school">${esc(e.school)}</div><div class="t3-edu-year">${esc(e.year)}</div></div>`).join('');
   return `<div class="cv-t3">
     <div class="t3-sidebar">
-      <div class="t3-avatar">${ini}</div>
-      <div class="t3-name">${d.name}</div>
-      <div class="t3-role">${d.role}</div>
+      <div class="t3-avatar">${esc(ini)}</div>
+      <div class="t3-name">${esc(d.name)}</div>
+      <div class="t3-role">${esc(d.role)}</div>
       <div class="t3-s-title">Contacto</div>
-      ${d.email?`<div class="t3-contact">✉ ${d.email}</div>`:''}
-      ${d.phone?`<div class="t3-contact">📞 ${d.phone}</div>`:''}
-      ${d.location?`<div class="t3-contact">📍 ${d.location}</div>`:''}
-      ${d.linkedin?`<div class="t3-contact">in ${d.linkedin}</div>`:''}
-      ${d.github?`<div class="t3-contact">⌥ ${d.github}</div>`:''}
+      ${d.email?`<div class="t3-contact">✉ ${esc(d.email)}</div>`:''}
+      ${d.phone?`<div class="t3-contact">📞 ${esc(d.phone)}</div>`:''}
+      ${d.location?`<div class="t3-contact">📍 ${esc(d.location)}</div>`:''}
+      ${d.linkedin?`<div class="t3-contact">in ${esc(d.linkedin)}</div>`:''}
+      ${d.github?`<div class="t3-contact">⌥ ${esc(d.github)}</div>`:''}
       <div class="t3-s-title">Habilidades</div>
       ${skills}
       <div class="t3-s-title">Soft skills</div>
       ${soft}
     </div>
     <div class="t3-main">
-      ${d.about?`<div class="t3-section-title">Perfil profesional</div><div class="t3-about">${d.about}</div>`:''}
+      ${d.about?`<div class="t3-section-title">Perfil profesional</div><div class="t3-about">${esc(d.about)}</div>`:''}
       <div class="t3-section-title">Experiencia laboral</div>
       ${exp}
       <div class="t3-section-title">Educación</div>
@@ -492,14 +493,14 @@ function renderExpList(){
   document.getElementById('exp-list').innerHTML = expItems.map(e=>`
     <div class="dynamic-item">
       <div class="dynamic-item-header">
-        <span class="dynamic-item-title">${e.role||'Nueva experiencia'}</span>
+        <span class="dynamic-item-title">${esc(e.role)||'Nueva experiencia'}</span>
         <button class="btn-remove" onclick="removeExp(${e.id});render()">✕</button>
       </div>
       <div class="dynamic-item-body">
-        <div class="field"><label>Puesto</label><input value="${e.role}" oninput="updateExp(${e.id},'role',this.value);this.closest('.dynamic-item').querySelector('.dynamic-item-title').textContent=this.value||'Nueva experiencia'"/></div>
-        <div class="field"><label>Empresa</label><input value="${e.company}" oninput="updateExp(${e.id},'company',this.value)"/></div>
-        <div class="field"><label>Período</label><input value="${e.period}" placeholder="Ene 2024 — Actualidad" oninput="updateExp(${e.id},'period',this.value)"/></div>
-        <div class="field"><label>Descripción</label><textarea oninput="updateExp(${e.id},'desc',this.value)">${e.desc}</textarea></div>
+        <div class="field"><label>Puesto</label><input value="${esc(e.role)}" oninput="updateExp(${e.id},'role',this.value);this.closest('.dynamic-item').querySelector('.dynamic-item-title').textContent=this.value||'Nueva experiencia'"/></div>
+        <div class="field"><label>Empresa</label><input value="${esc(e.company)}" oninput="updateExp(${e.id},'company',this.value)"/></div>
+        <div class="field"><label>Período</label><input value="${esc(e.period)}" placeholder="Ene 2024 — Actualidad" oninput="updateExp(${e.id},'period',this.value)"/></div>
+        <div class="field"><label>Descripción</label><textarea oninput="updateExp(${e.id},'desc',this.value)">${esc(e.desc)}</textarea></div>
       </div>
     </div>`).join('');
   render();
@@ -523,13 +524,13 @@ function renderEduList(){
   document.getElementById('edu-list').innerHTML = eduItems.map(e=>`
     <div class="dynamic-item">
       <div class="dynamic-item-header">
-        <span class="dynamic-item-title">${e.degree||'Nueva educación'}</span>
+        <span class="dynamic-item-title">${esc(e.degree)||'Nueva educación'}</span>
         <button class="btn-remove" onclick="removeEdu(${e.id});render()">✕</button>
       </div>
       <div class="dynamic-item-body">
-        <div class="field"><label>Título / Grado</label><input value="${e.degree}" oninput="updateEdu(${e.id},'degree',this.value);this.closest('.dynamic-item').querySelector('.dynamic-item-title').textContent=this.value||'Nueva educación'"/></div>
-        <div class="field"><label>Institución</label><input value="${e.school}" oninput="updateEdu(${e.id},'school',this.value)"/></div>
-        <div class="field"><label>Año</label><input value="${e.year}" placeholder="2022 — 2025" oninput="updateEdu(${e.id},'year',this.value)"/></div>
+        <div class="field"><label>Título / Grado</label><input value="${esc(e.degree)}" oninput="updateEdu(${e.id},'degree',this.value);this.closest('.dynamic-item').querySelector('.dynamic-item-title').textContent=this.value||'Nueva educación'"/></div>
+        <div class="field"><label>Institución</label><input value="${esc(e.school)}" oninput="updateEdu(${e.id},'school',this.value)"/></div>
+        <div class="field"><label>Año</label><input value="${esc(e.year)}" placeholder="2022 — 2025" oninput="updateEdu(${e.id},'year',this.value)"/></div>
       </div>
     </div>`).join('');
   render();
@@ -580,7 +581,7 @@ async function downloadPDF(){
       x: 0, y: 0,
       width: pageW,
       windowWidth: preview.scrollWidth,
-      html2canvas: { scale: 0.75, useCORS: true }
+      html2canvas: { useCORS: true }
     });
 
     msg.textContent = 'Generando PDF...';
